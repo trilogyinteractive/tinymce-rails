@@ -32,7 +32,7 @@ module TinyMCE::Rails
       options.each do |key, value|
         if value.is_a?(Array) && value.all? { |v| v.is_a?(String) }
           result[key] = value.join(",")
-        elsif value.to_s.starts_with?("function(")
+        elsif value.to_s.starts_with?("function(")  || key.include?("callback")
           result[key] = Function.new(value)
         else
           result[key] = value
